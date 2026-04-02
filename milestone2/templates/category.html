@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ category }} - Clothing Store</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Back to Home Button -->
+        <div class="navigation">
+            <a href="{{ url_for('index') }}" class="btn">Back to Home</a>
+        </div>
+
+        <h1>{{ category }} - Clothing Store</h1>
+
+        <ul>
+            {% for index, item in items.iterrows() %}
+                <li>
+                    <a href="{{ url_for('clothing_details', item_id=item['Clothing ID']) }}">
+                        {{ item['Clothes Title'] }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <a href="{{ url_for('index') }}">Back to Home</a>
+    </div>
+</body>
+</html>

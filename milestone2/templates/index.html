@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Online Shopping</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Online Clothing Store</h1>
+        <form action="{{ url_for('search') }}" method="post">
+            <input type="text" name="keyword" placeholder="Search for clothes...">
+            <button type="submit">Search</button>
+        </form>
+
+        <h2>Categories</h2>
+        <ul>
+            {% for category in categories %}
+                <li><a href="{{ url_for('category_items', category_name=category) }}">{{ category }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirm Review</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Back to Home Button -->
+        <div class="navigation">
+            <a href="{{ url_for('index') }}" class="btn">Back to Home</a>
+        </div>
+
+        <h1>Confirm Your Review for Item {{ review_data['Clothing ID'] }}</h1>
+
+        <p><strong>Title:</strong> {{ review_data['Review Title'] }}</p>
+        <p><strong>Review:</strong> {{ review_data['Review Text'] }}</p>
+        <p><strong>Rating:</strong> {{ review_data['Rating'] }}</p>
+        <p><strong>Recommendation:</strong> {{ 'Yes' if review_data['Recommendation'] == 1 else 'No' }}</p>
+
+        <form action="{{ url_for('confirm_review') }}" method="post">
+            <!-- Hidden inputs to pass data -->
+            <input type="hidden" name="Clothing ID" value="{{ review_data['Clothing ID'] }}">
+            <input type="hidden" name="Review Title" value="{{ review_data['Review Title'] }}">
+            <input type="hidden" name="Review Text" value="{{ review_data['Review Text'] }}">
+            <input type="hidden" name="Rating" value="{{ review_data['Rating'] }}">
+            <input type="hidden" name="Recommendation" value="{{ review_data['Recommendation'] }}">
+
+            <p>Please confirm your review details.</p>
+
+            <button type="submit">Confirm and Submit</button>
+        </form>
+
+        <a href="{{ url_for('add_review', item_id=review_data['Clothing ID']) }}">Go back to edit</a>
+    </div>
+</body>
+</html>

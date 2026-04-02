@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ item['Clothes Title'] }} - Details</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Back to Home Button -->
+        <div class="navigation">
+            <a href="{{ url_for('index') }}" class="btn">Back to Home</a>
+        </div>
+
+        <!-- Add Review Button at the Top -->
+        <div class="add-review-top">
+            <a href="{{ url_for('add_review', item_id=item['Clothing ID']) }}" class="btn-add-review">Add a Review</a>
+        </div>
+
+        <h1>{{ item['Clothes Title'] }}</h1>
+        <p>{{ item['Clothes Description'] }}</p>
+
+        <h2>Details</h2>
+        <p><strong>Division Name:</strong> {{ item['Division Name'] }}</p>
+        <p><strong>Department Name:</strong> {{ item['Department Name'] }}</p>
+        <p><strong>Class Name:</strong> {{ item['Class Name'] }}</p>
+
+        <h2>Reviews</h2>
+        {% if reviews.empty %}
+            <p>No reviews yet.</p>
+        {% else %}
+            <ul>
+            {% for index, review in reviews.iterrows() %}
+                <li>
+                    <strong>{{ review['Review Title'] }}</strong>
+                    {% if review['Source'] == 'New' %}
+                        <em>(New Review)</em>
+                    {% endif %}
+                    <br>
+                    {{ review['Review Text'] }}<br>
+                    Rating: {{ review['Rating'] }} | Recommended: {{ 'Yes' if review['Recommendation'] == 1 else 'No' }}
+                </li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+
+        
+        <a href="{{ url_for('add_review', item_id=item['Clothing ID']) }}">Add a Review</a><br> 
+        <a href="{{ url_for('index') }}">Back to Home</a>
+    </div>
+</body>
+</html>

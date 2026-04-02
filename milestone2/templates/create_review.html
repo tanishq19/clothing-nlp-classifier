@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <title>Create Review for {{ item['Clothes Title'] }}</title>
+</head>
+<body>
+    <h1>Create Review for {{ item['Clothes Title'] }}</h1>
+
+    <form action="" method="POST">
+        <textarea name="review_text" placeholder="Write your review here..." required></textarea>
+        <button type="submit">Submit Review</button>
+    </form>
+
+    <a href="{{ url_for('clothing_detail', item_id=item['Item ID']) }}">Back to Item Details</a>
+</body>
+</html>
